@@ -185,3 +185,14 @@ LOGGING = {
     },
 }
 # Loggin Setting End
+
+# SWAGGER_SETTINGS Start
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': True,
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+}
+# SWAGGER_SETTINGS End
