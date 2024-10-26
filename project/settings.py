@@ -186,7 +186,7 @@ LOGGING = {
 }
 # Loggin Setting End
 
-# SWAGGER_SETTINGS Start
+# SWAGGER Setting Start
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': True,
     'SECURITY_DEFINITIONS': {
@@ -195,4 +195,14 @@ SWAGGER_SETTINGS = {
         }
     },
 }
-# SWAGGER_SETTINGS End
+# SWAGGER Setting End
+
+# EMAIL Setting Start
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'test-email@gmail.com'
+EMAIL_HOST_PASSWORD = 'test-email-password'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL End Start
