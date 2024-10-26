@@ -1,12 +1,12 @@
 from rest_framework.permissions import AllowAny
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.generics import GenericAPIView
-from rest_framework.response import Response
-from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from .models import Notification
 from .serializers import NotificationSerializer
+from project.utils import custom_response
+from rest_framework import status
 
 notification_post_body = openapi.Schema(
     type=openapi.TYPE_OBJECT,
@@ -39,7 +39,4 @@ class NotificationAPIView(CreateModelMixin, GenericAPIView):
     )
     def post(self, request, *args, **kwargs):
         response = self.create(request, *args, **kwargs)
-        return Response(
-            data=response.data,
-            status=status.HTTP_201_CREATED
-        )
+        return custom_response(data=response.data, status_code=status.HTTP_201_CREATED)

@@ -1,9 +1,9 @@
-from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Notification
 from notification.serializers import NotificationSerializer
+from project.utils import custom_response
 
 class SendEmailView(APIView):
     def post(self, request):
@@ -24,4 +24,4 @@ class SendEmailView(APIView):
 
         # 발송된 객체들을 시리얼라이즈하여 반환
         serializer = NotificationSerializer(notifications, many=True)
-        return Response(serializer.data)
+        return custom_response(data=serializer.data)
