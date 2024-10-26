@@ -1,11 +1,22 @@
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Notification
+from notification.models import Notification
 from notification.serializers import NotificationSerializer
 from project.utils import custom_response
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
 
 class SendEmailView(APIView):
+    
+    @swagger_auto_schema(
+        operation_description="이메일 발송 API",
+        operation_summary="이메일 발송 API",
+        responses={
+            200: NotificationSerializer(many=True),  # 성공 시 발송된 Notification 객체 리스트 반환
+            400: "Bad Request"  # 실패 시 응답 코드
+        }
+    )
     def post(self, request):
         # email_sent가 0인 Notification 객체들 조회
         notifications = Notification.objects.filter(email_sent=0)
@@ -24,4 +35,4 @@ class SendEmailView(APIView):
 
         # 발송된 객체들을 시리얼라이즈하여 반환
         serializer = NotificationSerializer(notifications, many=True)
-        return custom_response(data=serializer.data)
+        return custom_response(data=serializer.data, status_code=status.HTTP_200_OK)
