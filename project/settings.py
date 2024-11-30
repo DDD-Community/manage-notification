@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # pip
     'rest_framework',
     'drf_yasg',
+    'tinymce',
     # app
     'notification',
     'emailsend',
